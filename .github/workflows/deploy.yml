@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
       - name: Install dependencies
         run: pnpm install
 
@@ -30,7 +33,7 @@ jobs:
       - name: Upload production-ready build files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./dist  # لازم يكون نفس مسار مجلد build بتاع Astro
 
   deploy:
     needs: build
